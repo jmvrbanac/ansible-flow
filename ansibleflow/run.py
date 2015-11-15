@@ -1,3 +1,4 @@
+import os
 import sys
 import subprocess
 
@@ -5,12 +6,21 @@ from ansibleflow.config import config
 from ansibleflow.venv import execute_under_env
 
 
+def convert_var_filename_to_arg(filename, environment):
+    file_path = filename
+    if environment.directory:
+        file_path = os.path.join(environment.directory, filename)
+
+    return ' -e @{0}'.format(os.path.abspath(file_path))
+
+
 def build_ansible_command(target, environment):
     command = 'ansible-playbook'
 
     if environment.custom_var_files:
         for filename in environment.custom_var_files:
-            command += ' -e @./{0}'.format(filename)
+            command += convert_var_filename_to_arg(filename, environment)
+
     if environment.vault_key:
         command += ' --vault-password-file {0}'.format(environment.vault_key)
 

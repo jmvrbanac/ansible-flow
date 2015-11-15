@@ -20,17 +20,19 @@ class Target(object):
 
 
 class Environment(object):
-    def __init__(self, name, vault_key=None, custom_vars=None):
+    def __init__(self, name, vault_key=None, custom_vars=None, directory=None):
         self.name = name
         self.vault_key = vault_key
         self.custom_var_files = custom_vars
+        self.directory = directory
 
     @classmethod
     def from_dict(cls, name, input_dict):
         return Environment(
             name,
             input_dict.get('vault-key', None),
-            input_dict.get('custom-var-files', None)
+            input_dict.get('custom-var-files', None),
+            input_dict.get('directory', None)
         )
 
 
