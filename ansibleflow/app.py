@@ -27,6 +27,7 @@ def setup_argument_parser():
     )
 
     run_parser = subparsers.add_parser('run')
+    run_parser.add_argument('--env', type=str, default='default')
     run_parser.add_argument(
         'run_action',
         nargs='*',

@@ -42,8 +42,16 @@ class Config(object):
     @property
     def environments(self):
         converted = {}
-        for name, env_dict in self._config.get('environments', {}).items():
-            environment = Environment.from_dict(name, env_dict)
+        environments_dict = self._config.get('environments', {})
+        default_env_dict = environments_dict.get('default')
+
+        for name, env_dict in environments_dict.items():
+            # Environment settings on a default environment
+            working_dict = {}
+            working_dict.update(default_env_dict)
+            working_dict.update(env_dict)
+
+            environment = Environment.from_dict(name, working_dict)
             converted[name] = environment
         return converted
 

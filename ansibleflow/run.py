@@ -22,16 +22,16 @@ def build_ansible_command(target, environment):
     return command
 
 
-def run(target_name, arguments):
+def run(target_name, env_name, arguments):
     target = config.targets.get(target_name, None)
-    environment = config.environments.get('default', None)
+    environment = config.environments.get(env_name, None)
 
     if not target:
         print('Could not find target: {0}'.format(target_name))
         sys.exit(1)
 
     if not environment:
-        print('Could not find environment: default')
+        print('Could not find environment: {0}'.format(env_name))
         sys.exit(1)
 
     print(build_ansible_command(target, environment))
@@ -40,7 +40,7 @@ def run(target_name, arguments):
 
 def argument_handler(value, all_args):
     if value == True:
-        print('Please specify a environment to run...')
+        print('Please specify a target to run...')
         sys.exit(1)
 
-    run(value[0], all_args)
+    run(value[0], all_args.env, all_args)
