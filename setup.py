@@ -24,7 +24,7 @@ setup(
 
     keywords='ansible management workflow',
     packages=find_packages(exclude=['contrib', 'docs', 'test*']),
-    install_requires=['six'],
+    install_requires=['ansible<2.0','pyyaml', 'virtualenv'],
     package_data={},
     data_files=[],
     entry_points={

@@ -1,6 +1,6 @@
 import argparse
 
-from ansibleflow import config, venv, run
+from ansibleflow import config, venv, run, rekey
 
 
 class ArgumentMapper(object):
@@ -26,6 +26,29 @@ def setup_argument_parser():
         choices=['create', 'delete', 'recreate'],
     )
 
+    rekey_parser = subparsers.add_parser('rekey')
+    rekey_parser.add_argument(
+        '--orig-key',
+        type=str,
+        required=True,
+        metavar='path',
+        help='Filename for the original vault key'
+    )
+    rekey_parser.add_argument(
+        '--new-key',
+        type=str,
+        required=True,
+        metavar='path',
+        help='Filename for the new vault key'
+    )
+    rekey_parser.add_argument('filename', type=str, metavar='file_path')
+    rekey_parser.add_argument(
+        'rekey_action',
+        nargs='*',
+        default=True,
+        help=argparse.SUPPRESS
+    )
+
     run_parser = subparsers.add_parser('run')
     run_parser.add_argument('--env', type=str, default='default')
     run_parser.add_argument(
@@ -44,6 +67,7 @@ def main():
     mapping = {
         'venv_action': venv.argument_handler,
         'run_action': run.argument_handler,
+        'rekey_action': rekey.argument_handler,
     }
 
     mapper = ArgumentMapper(mapping, parser)

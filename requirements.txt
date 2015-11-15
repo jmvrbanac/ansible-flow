@@ -1,3 +1,3 @@
 virtualenv
 pyyaml
-pexpect
+ansible<2.0
