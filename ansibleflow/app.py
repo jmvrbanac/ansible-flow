@@ -1,6 +1,6 @@
 import argparse
 
-from ansibleflow import config, venv, run, rekey
+from ansibleflow import venv, run, rekey
 
 
 class ArgumentMapper(object):

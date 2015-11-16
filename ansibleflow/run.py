@@ -1,6 +1,5 @@
 import os
 import sys
-import subprocess
 
 from ansibleflow.config import config
 from ansibleflow.venv import execute_under_env
@@ -47,9 +46,8 @@ def run(target_name, env_name, arguments):
     print(build_ansible_command(target, environment))
 
 
-
 def argument_handler(value, all_args):
-    if value == True:
+    if value is True:
         print('Please specify a target to run...')
         sys.exit(1)
 

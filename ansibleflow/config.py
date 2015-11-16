@@ -72,10 +72,12 @@ class Config(object):
 
         return req_str
 
+
 def config_exists(filename):
     if not os.path.exists(filename):
         print('Error: Could not file project configuration!')
         sys.exit(1)
+
 
 def load_config(filename):
     document = None
