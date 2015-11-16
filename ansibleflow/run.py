@@ -1,6 +1,7 @@
 import os
 import sys
 
+from ansibleflow import log
 from ansibleflow.config import get_config
 from ansibleflow.venv import execute_under_env
 
@@ -31,24 +32,27 @@ def build_ansible_command(target, environment):
     return command
 
 
-def run(target_name, env_name, arguments):
+def run(target_name, env_name, arguments, dry_run=False):
     target = get_config().targets.get(target_name, None)
     environment = get_config().environments.get(env_name, None)
 
     if not target:
-        print('Could not find target: {0}'.format(target_name))
+        log('Could not find target: {0}'.format(target_name))
         sys.exit(1)
 
     if not environment:
-        print('Could not find environment: {0}'.format(env_name))
+        log('Could not find environment: {0}'.format(env_name))
         sys.exit(1)
 
-    print(build_ansible_command(target, environment))
-
+    command = build_ansible_command(target, environment)
+    if dry_run:
+        log(command)
+    else:
+        execute_under_env(command)
 
 def argument_handler(value, all_args):
     if value is True:
-        print('Please specify a target to run...')
+        log('Please specify a target to run...')
         sys.exit(1)
 
     run(value[0], all_args.env, all_args)
