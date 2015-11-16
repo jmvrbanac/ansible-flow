@@ -17,13 +17,13 @@ def env_exists():
 def execute_under_env(command):
     """Completely ghetto way of executing commands under a virtualenv."""
     activate_cmd = 'source {0}/bin/activate\n'.format(ENV_PATH)
-    long_cmd = '{0} && echo "!!DONE!!"\n'.format(command)
+    long_cmd = '{0}; echo "!!DONE!!"\n'.format(command)
 
     proc = subprocess.Popen(
         ['/bin/bash'],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT
+        stderr=subprocess.PIPE
     )
     proc.stdin.write(activate_cmd)
     proc.stdin.flush()
