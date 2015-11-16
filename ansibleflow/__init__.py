@@ -3,4 +3,4 @@ SUPPRESS_OUTPUT = False
 
 def log(output):
     if not SUPPRESS_OUTPUT:
-        print(output)
+        print(output.encode('utf-8'))

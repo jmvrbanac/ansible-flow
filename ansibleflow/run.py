@@ -17,6 +17,9 @@ def convert_var_filename_to_arg(filename, environment):
 def build_ansible_command(target, environment):
     command = 'ansible-playbook'
 
+    if target.inventory:
+        command += ' -i {0}'.format(os.path.abspath(target.inventory))
+
     if environment.custom_var_files:
         for filename in environment.custom_var_files:
             command += convert_var_filename_to_arg(filename, environment)

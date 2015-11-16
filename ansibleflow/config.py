@@ -7,9 +7,10 @@ _config = None
 
 
 class Target(object):
-    def __init__(self, name, playbook, tags=None):
+    def __init__(self, name, playbook, inventory=None, tags=None):
         self.name = name
         self.playbook = playbook
+        self.inventory = inventory
         self.tags = tags
 
     @classmethod
@@ -17,6 +18,7 @@ class Target(object):
         return Target(
             name,
             input_dict.get('playbook', None),
+            input_dict.get('inventory', None),
             input_dict.get('tags', None)
         )
 
