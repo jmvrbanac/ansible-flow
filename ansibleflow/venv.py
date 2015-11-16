@@ -3,22 +3,20 @@ import shutil
 import subprocess
 import virtualenv as venv
 
-from ansibleflow.config import config
+from ansibleflow import log
+from ansibleflow.config import get_config
 
 DEFAULT_VENV_DIR = '.venv'
-
-
-def env_path():
-    return os.path.abspath('./{0}'.format(DEFAULT_VENV_DIR))
+ENV_PATH = os.path.abspath('./{0}'.format(DEFAULT_VENV_DIR))
 
 
 def env_exists():
-    return os.path.exists(env_path())
+    return os.path.exists(ENV_PATH)
 
 
 def execute_under_env(command):
     """Completely ghetto way of executing commands under a virtualenv."""
-    activate_cmd = 'source {0}/bin/activate\n'.format(env_path())
+    activate_cmd = 'source {0}/bin/activate\n'.format(ENV_PATH)
     long_cmd = '{0} && echo "!!DONE!!"\n'.format(command)
 
     proc = subprocess.Popen(
@@ -38,16 +36,16 @@ def execute_under_env(command):
         if '!!DONE!!' in output:
             proc.stdin.write('exit\n')
         else:
-            print(output.strip())
+            log(output.strip())
 
 
 def create_env():
     if env_exists():
-        print('Virtual environment already exists.')
-        return
-    print('Creating virtual environment...')
+        raise Exception('Virtual environment already exists.')
 
-    home_dir, lib_dir, inc_dir, bin_dir = venv.path_locations(env_path())
+    log('Creating virtual environment...')
+
+    home_dir, lib_dir, inc_dir, bin_dir = venv.path_locations(ENV_PATH)
     python_loc = venv.install_python(
         home_dir,
         lib_dir,
@@ -64,16 +62,19 @@ def create_env():
     venv.install_wheel(['setuptools', 'pip'], python_abs_loc, None)
     venv.install_distutils(home_dir)
 
-    print('Installing requirements...')
-    req_cmd = '{0}/bin/pip install {1}'.format(env_path(), config.requirements)
+    log('Installing requirements...')
+    req_cmd = '{0}/bin/pip install {1}'.format(
+        ENV_PATH,
+        get_config().requirements
+    )
     execute_under_env(req_cmd)
 
-    print('Virtual environment created!')
+    log('Virtual environment created!')
 
 
 def delete_env():
-    shutil.rmtree(env_path())
-    print('Virtual environment deleted!')
+    shutil.rmtree(ENV_PATH)
+    log('Virtual environment deleted!')
 
 
 def recreate_env():

@@ -3,6 +3,8 @@ import sys
 
 import yaml
 
+_config = None
+
 
 class Target(object):
     def __init__(self, name, playbook, tags=None):
@@ -90,4 +92,9 @@ def load_config(filename):
     return Config(document)
 
 
-config = load_config(os.path.abspath('./project.yml'))
+def get_config(filename='./project.yml'):
+    global _config  # Ugly, but it works for now
+
+    if not _config:
+        _config = load_config(os.path.abspath(filename))
+    return _config

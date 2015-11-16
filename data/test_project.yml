@@ -1,0 +1,16 @@
+---
+requirements:
+    - ansible==1.9.4
+
+environments:
+    default:
+        vault-key: ./vault-key
+        custom-var-files:
+            - general.yml
+    dev:
+        directory: ./envs/dev
+
+targets:
+    create:
+        playbook: create.yml
+        tags: 'server_creation'
