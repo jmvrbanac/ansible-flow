@@ -1,3 +1,4 @@
 virtualenv
 pyyaml
 ansible<2.0
+capturer

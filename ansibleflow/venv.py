@@ -1,10 +1,12 @@
 import os
 import shutil
 import subprocess
+import time
 import virtualenv as venv
 
 from ansibleflow import log
 from ansibleflow.config import get_config
+from capturer import CaptureOutput
 
 DEFAULT_VENV_DIR = '.venv'
 ENV_PATH = os.path.abspath('./{0}'.format(DEFAULT_VENV_DIR))
@@ -17,26 +19,20 @@ def env_exists():
 def execute_under_env(command):
     """Completely ghetto way of executing commands under a virtualenv."""
     activate_cmd = 'source {0}/bin/activate\n'.format(ENV_PATH)
-    long_cmd = '{0}; echo "!!DONE!!"\n'.format(command)
+    long_cmd = '{0}; exit\n'.format(command)
 
-    proc = subprocess.Popen(
-        ['/bin/bash'],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
-    proc.stdin.write(activate_cmd)
-    proc.stdin.flush()
-    proc.stdin.write(long_cmd)
-    proc.stdin.flush()
+    with CaptureOutput() as capturer:
+        proc = subprocess.Popen(
+            ['/bin/bash'],
+            stdin=subprocess.PIPE,
+        )
 
-    while proc.poll() is None:
-        output = proc.stdout.readline()
+        proc.stdin.write(activate_cmd)
+        proc.stdin.flush()
+        proc.stdin.write(long_cmd)
+        proc.stdin.flush()
 
-        if '!!DONE!!' in output:
-            proc.stdin.write('exit\n')
-        else:
-            log(output.strip())
+        proc.wait()
 
 
 def create_env():

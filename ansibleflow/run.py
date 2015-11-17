@@ -48,9 +48,9 @@ def run(target_name, env_name, arguments, dry_run=False):
         sys.exit(1)
 
     command = build_ansible_command(target, environment)
-    if dry_run:
-        log(command)
-    else:
+    log(command)
+
+    if not dry_run:
         execute_under_env(command)
 
 def argument_handler(value, all_args):
