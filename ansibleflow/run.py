@@ -51,7 +51,11 @@ def run(target_name, env_name, arguments, dry_run=False):
     log(command)
 
     if not dry_run:
-        execute_under_env(command)
+        os_env = None
+        if environment.ansible_config:
+            os_env = {'ANSIBLE_CONFIG': environment.ansible_config}
+
+        execute_under_env(command, os_env)
 
 def argument_handler(value, all_args):
     if value is True:

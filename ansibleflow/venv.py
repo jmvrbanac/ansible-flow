@@ -16,15 +16,20 @@ def env_exists():
     return os.path.exists(ENV_PATH)
 
 
-def execute_under_env(command):
+def execute_under_env(command, os_env=None):
     """Completely ghetto way of executing commands under a virtualenv."""
     activate_cmd = 'source {0}/bin/activate\n'.format(ENV_PATH)
     long_cmd = '{0}; exit\n'.format(command)
+
+    env_vars = {}
+    if os_env:
+        env_vars.update(os_env)
 
     with CaptureOutput() as capturer:
         proc = subprocess.Popen(
             ['/bin/bash'],
             stdin=subprocess.PIPE,
+            env=env_vars
         )
 
         proc.stdin.write(activate_cmd)
