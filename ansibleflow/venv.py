@@ -32,9 +32,9 @@ def execute_under_env(command, os_env=None):
             env=env_vars
         )
 
-        proc.stdin.write(activate_cmd)
+        proc.stdin.write(activate_cmd.encode('utf-8'))
         proc.stdin.flush()
-        proc.stdin.write(long_cmd)
+        proc.stdin.write(long_cmd.encode('utf-8'))
         proc.stdin.flush()
 
         proc.wait()
