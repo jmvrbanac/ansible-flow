@@ -1,7 +1,6 @@
 import os
 import shutil
 import subprocess
-import time
 import virtualenv as venv
 
 from ansibleflow import log
@@ -26,7 +25,7 @@ def execute_under_env(command, os_env=None):
     if os_env:
         env_vars.update(os_env)
 
-    with CaptureOutput() as capturer:
+    with CaptureOutput():
         proc = subprocess.Popen(
             ['/bin/bash'],
             stdin=subprocess.PIPE,
