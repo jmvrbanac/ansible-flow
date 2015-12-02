@@ -7,11 +7,13 @@ _config = None
 
 
 class Target(object):
-    def __init__(self, name, playbooks, inventory=None, tags=None):
+    def __init__(self, name, playbooks, inventory=None, tags=None,
+                 options=None):
         self.name = name
         self.playbooks = playbooks
         self.inventory = inventory
         self.tags = tags
+        self.options = options
 
     @classmethod
     def from_dict(cls, name, input_dict):
@@ -19,7 +21,8 @@ class Target(object):
             name,
             input_dict.get('playbooks', None),
             input_dict.get('inventory', None),
-            input_dict.get('tags', None)
+            input_dict.get('tags', None),
+            input_dict.get('ansible-options', None)
         )
 
 
