@@ -3,7 +3,7 @@ import sys
 
 from ansibleflow import log
 from ansibleflow.config import get_config
-from ansibleflow.venv import execute_under_env
+from ansibleflow.venv import execute_under_env, env_exists
 
 
 def convert_var_filename_to_arg(filename, environment):
@@ -41,6 +41,11 @@ def build_ansible_command(playbook, target, environment):
 def run(target_name, env_name, arguments, dry_run=False):
     target = get_config().targets.get(target_name, None)
     environment = get_config().environments.get(env_name, None)
+
+    if not env_exists():
+        log('Virtual environment does not exist.. '
+            'Please run: ansible-flow venv create')
+        sys.exit(1)
 
     if not target:
         log('Could not find target: {0}'.format(target_name))
