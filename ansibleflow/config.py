@@ -7,9 +7,9 @@ _config = None
 
 
 class Target(object):
-    def __init__(self, name, playbook, inventory=None, tags=None):
+    def __init__(self, name, playbooks, inventory=None, tags=None):
         self.name = name
-        self.playbook = playbook
+        self.playbooks = playbooks
         self.inventory = inventory
         self.tags = tags
 
@@ -17,7 +17,7 @@ class Target(object):
     def from_dict(cls, name, input_dict):
         return Target(
             name,
-            input_dict.get('playbook', None),
+            input_dict.get('playbooks', None),
             input_dict.get('inventory', None),
             input_dict.get('tags', None)
         )

@@ -14,7 +14,7 @@ def convert_var_filename_to_arg(filename, environment):
     return ' -e @{0}'.format(os.path.abspath(file_path))
 
 
-def build_ansible_command(target, environment):
+def build_ansible_command(playbook, target, environment):
     command = 'ansible-playbook'
 
     if target.inventory:
@@ -27,7 +27,7 @@ def build_ansible_command(target, environment):
     if environment.vault_key:
         command += ' --vault-password-file {0}'.format(environment.vault_key)
 
-    command += ' {0}'.format(target.playbook)
+    command += ' {0}'.format(playbook)
 
     if target.tags:
         command += ' --tags "{0}"'.format(target.tags)
@@ -47,15 +47,17 @@ def run(target_name, env_name, arguments, dry_run=False):
         log('Could not find environment: {0}'.format(env_name))
         sys.exit(1)
 
-    command = build_ansible_command(target, environment)
-    log(command)
+    for playbook in target.playbooks:
+        command = build_ansible_command(playbook, target, environment)
+        log(command)
 
-    if not dry_run:
-        os_env = None
-        if environment.ansible_config:
-            os_env = {'ANSIBLE_CONFIG': environment.ansible_config}
+        if not dry_run:
+            os_env = None
+            if environment.ansible_config:
+                os_env = {'ANSIBLE_CONFIG': environment.ansible_config}
 
-        execute_under_env(command, os_env)
+            execute_under_env(command, os_env)
+
 
 def argument_handler(value, all_args):
     if value is True:

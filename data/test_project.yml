@@ -12,5 +12,6 @@ environments:
 
 targets:
     create:
-        playbook: create.yml
+        playbooks:
+            - create.yml
         tags: 'server_creation'
