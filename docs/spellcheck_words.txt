@@ -1,0 +1,12 @@
+ansible
+playbook
+playbooks
+indices
+dev
+yml
+venv
+envs
+auth
+ini
+cli
+github

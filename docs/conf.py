@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.abspath('../'))
 
 # -- General configuration ------------------------------------------------
 
-extensions = []
+extensions = ['sphinxcontrib.spelling']
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
@@ -43,6 +43,7 @@ exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 
 todo_include_todos = False
+spelling_word_list_filename = 'spellcheck_words.txt'
 
 # -- Options for HTML output ----------------------------------------------
 html_theme = "sphinx_rtd_theme"

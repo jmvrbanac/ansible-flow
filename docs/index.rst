@@ -1,17 +1,32 @@
-.. ansible-flow documentation master file, created by
-   sphinx-quickstart on Wed Dec  2 10:24:47 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to ansible-flow's documentation!
 ========================================
 
+Ansible-flow is a simple utility to help make ansible easier to use with a
+specific set of production use-cases.
+
+If you need to do the following, the ansible-flow might be for you:
+
+* Use the same playbooks against multiple environments
+* Use bastions in your deployment
+* Run a collection of playbooks in sequence.
+
 Contents:
+---------
 
 .. toctree::
    :maxdepth: 2
 
+   install
+   configuration
+   using
 
+.. note::
+    ansible-flow is not affiliated with the ansible project in any way.
+
+Links:
+------
+
+* GitHub: `<https://github.com/jmvrbanac/ansible-flow>`_
 
 Indices and tables
 ==================
