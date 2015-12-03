@@ -61,16 +61,16 @@ def setup_argument_parser():
     return parser
 
 
-def main():
+def main(args=None, venv_handler=None, run_handler=None, rekey_handler=None):
     parser = setup_argument_parser()
 
     mapping = {
-        'venv_action': venv.argument_handler,
-        'run_action': run.argument_handler,
-        'rekey_action': rekey.argument_handler,
+        'venv_action': venv_handler or venv.argument_handler,
+        'run_action': run_handler or run.argument_handler,
+        'rekey_action': rekey_handler or rekey.argument_handler,
     }
 
-    mapper = ArgumentMapper(mapping, parser)
+    mapper = ArgumentMapper(mapping, parser, args)
     mapper.execute()
 
 

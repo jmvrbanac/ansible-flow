@@ -2,3 +2,4 @@ specter
 coverage
 mock
 flake8
+six
