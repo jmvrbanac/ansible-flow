@@ -4,7 +4,7 @@ Ansible-Flow
 Ansible-flow is a simple utility to help make ansible easier to use with a
 specific set of production use-cases.
 
-If you need to do the following, the ansible-flow might be for you:
+If you need to do the following, then ansible-flow might be for you:
 
 * Use the same playbooks against multiple environments
 * Use bastions in your deployment
