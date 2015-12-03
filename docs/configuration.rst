@@ -38,9 +38,11 @@ Per Environment Options
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 * ``vault-key``: Path to your vault password file
-* ``custom-var-files``: A list of YAML files to load when executing your playbooks
+* ``custom-var-files``: A list of YAML files to load when executing your playbooks.
+  You can also use file globs in each entry.
 * ``directory``: A base directory for your ``custom-var-files``
 * ``ansible-config``: Path to a ansible configuration file
+* ``shell-variables``: Key value pairs of environmental variables to be used when executing ansible
 
 Example
 ^^^^^^^

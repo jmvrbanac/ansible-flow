@@ -22,6 +22,7 @@ def execute_under_env(command, os_env=None):
 
     env_vars = {}
     env_vars.update(os.environ)
+
     if os_env:
         env_vars.update(os_env)
 

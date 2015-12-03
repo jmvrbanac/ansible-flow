@@ -28,12 +28,13 @@ class Target(object):
 
 class Environment(object):
     def __init__(self, name, vault_key=None, custom_vars=None, directory=None,
-                 ansible_config=None):
+                 ansible_config=None, shell_vars=None):
         self.name = name
         self.vault_key = vault_key
         self.custom_var_files = custom_vars
         self.directory = directory
         self.ansible_config = ansible_config
+        self.shell_vars = shell_vars
 
     @classmethod
     def from_dict(cls, name, input_dict):
@@ -42,7 +43,8 @@ class Environment(object):
             input_dict.get('vault-key', None),
             input_dict.get('custom-var-files', None),
             input_dict.get('directory', None),
-            input_dict.get('ansible-config', None)
+            input_dict.get('ansible-config', None),
+            input_dict.get('shell-variables', None)
         )
 
 
