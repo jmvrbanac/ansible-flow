@@ -14,4 +14,4 @@ Links:
 ------
 
 * GitHub: `<https://github.com/jmvrbanac/ansible-flow>`_
-* ReadTheDocs: `<ansible-flow.readthedocs.org/en/stable/>`_
+* ReadTheDocs: `<http://ansible-flow.readthedocs.org/en/latest/>`_
