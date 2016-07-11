@@ -14,14 +14,14 @@ Requirements
 
 The requirements section is where you define any python requirements (in a list)
 that you will need to execute your ansible playbooks. For simple use-cases you
-should only need to define ``ansible`` or ``ansible==1.9.4``.
+should only need to define ``ansible`` or ``ansible==2.1.0``.
 
 Example:
 
 .. code-block:: yaml
 
     requirements:
-        - ansible==1.9.4
+        - ansible==2.1.0
 
 Environments
 ------------
@@ -115,7 +115,7 @@ Example Configuration
 
     ---
     requirements:
-        - ansible==1.9.4
+        - ansible==2.1.0
 
     environments:
         default:

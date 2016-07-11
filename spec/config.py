@@ -76,4 +76,4 @@ class ConfigModuleTests(Spec):
             expect('create').to.be_in(envs)
 
         def can_access_the_requirements_property(self):
-            expect(self.cfg.requirements).to.equal('ansible==1.9.4')
+            expect(self.cfg.requirements).to.equal('ansible==2.1.0')

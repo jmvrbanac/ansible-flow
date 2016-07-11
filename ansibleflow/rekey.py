@@ -1,7 +1,7 @@
 import sys
 
 from ansible.errors import AnsibleError
-from ansible.utils.vault import VaultLib
+from ansible.parsing.vault import VaultLib
 
 
 def load_vault_key(key_path):

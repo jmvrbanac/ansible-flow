@@ -33,8 +33,8 @@ project = u'ansible-flow'
 copyright = u'2015, John Vrbanac'
 author = u'John Vrbanac'
 
-version = u'0.1.0'
-release = u'0.1.0'
+version = u'0.2.0'
+release = u'0.2.0'
 
 language = None
 

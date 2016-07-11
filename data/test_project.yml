@@ -1,6 +1,6 @@
 ---
 requirements:
-    - ansible==1.9.4
+    - ansible==2.1.0
 
 environments:
     default:

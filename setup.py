@@ -6,7 +6,7 @@ with open('README.rst') as f:
 
 setup(
     name='ansible-flow',
-    version='0.1.0',
+    version='0.2.0',
     description=('Workflow tool to speed up interactions with Ansible'),
     long_description=desc,
     url='https://github.com/jmvrbanac/ansible-flow',
@@ -24,7 +24,7 @@ setup(
 
     keywords='ansible management workflow',
     packages=find_packages(exclude=['contrib', 'docs', 'spec*']),
-    install_requires=['ansible<2.0', 'pyyaml', 'virtualenv', 'capturer'],
+    install_requires=['ansible>=2.0', 'pyyaml', 'virtualenv', 'capturer'],
     package_data={},
     data_files=[],
     entry_points={
